@@ -1,25 +1,23 @@
-#include <locale.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define SIZE_STR 500
+#define SIZE_STR 100
 
 void okr(float r)
 {
-    float a, b;
-    b = 2 * M_PI * r;
-    a = M_PI * r * r;
-    printf("length ring - %f\n", b);
-    printf("Square ring - %f", a);
+    printf("\nPerim: ");
+    printf("%f\n", M_PI * 2 * r);
+    printf("\nSquare: ");
+    printf("%f", M_PI * r * r);
 }
+
 int main()
 {
-    setlocale(0, "rus");
     FILE* file;
-    char* fname = "/home/vlad/trpo/geometry-Sniper552/lab_input.txt";
+    char* fname = "lab_input.txt";
     file = fopen(fname, "r");
 
-    int A[SIZE_STR];
+    int a[SIZE_STR];
     int i = 0;
 
     if (file == NULL) {
@@ -27,37 +25,20 @@ int main()
         return 0;
     }
 
-    A[i] = fgetc(file);
+    a[i] = fgetc(file);
 
-    while (A[i] != EOF) {
+    while (a[i] != EOF) {
         i++;
-        A[i] = fgetc(file);
+        a[i] = fgetc(file);
     }
 
     int n = i;
     i = 0;
     int j = 0, t = 1;
 
-    //	for(i=0;A[i]==' ';i++);
-    //	if((A[i]=='c' ||A[i]=='C') && (A[i+1]=='i' ||A[i+1]=='I') &&
-    //(A[i+2]=='r' ||A[i+2]=='R') && (A[i+3]=='c' ||A[i+3]=='C') && (A[i+4]=='l'
-    //||A[i+4]=='L') && (A[i+5]=='e' ||A[i+5]=='E') ){ 		for(;i<n;i++){
-    //		printf("%c",A[i]);
-    //		}
-    //	while(i<n){
-    //    if(A[i]!=' '){
-    //        printf("%c",A[i]);
-    //        i++;
-    //    }else if((A[i-1]<='9' && A[i-1]>='0' && t==1) || (A[i-1]==',')){
-    //        printf(" ");
-    //        t=0;i++;
-    //    }else for(;A[i]==' ';i++);
-    //}
-    //	}else printf("Ââåäèòå êîððåêòíûå äàííûå(circle)");
-
     int k = 0;
     for (j = 0; j < n; j++) {
-        if (A[j] != ' ') {
+        if (a[j] != ' ') {
             k++;
         }
     }
@@ -67,28 +48,25 @@ int main()
     i = 0;
     k = 0;
     while (i < n) {
-        if (A[i] != ' ') {
-            c[k] = A[i];
+        if (a[i] != ' ') {
+            c[k] = a[i];
             k++;
             i++;
-        } else if (A[i - 1] <= '9' && A[i - 1] >= '0' && t == 1) {
+        } else if (a[i - 1] <= '9' && a[i - 1] >= '0' && t == 1) {
             c[k] = ' ';
             k++;
             i++;
             t = 0;
-        } else if (A[i - 1] == ',') {
+        } else if (a[i - 1] == ',') {
             c[k] = ' ';
             k++;
             i++;
         } else {
-            for (; A[i] == ' '; i++)
+            for (; a[i] == ' '; i++)
                 ;
         }
     }
-    // for(i=0;i<p;i++){
-    //	printf("%c",c[i]);
-    //}
-
+    int q1 = 1, q2 = 1, q3 = 1;
     i = 0, k = 0;
     while (i < p) {
         if (c[i] >= 'a' && c[i] <= 'z') {
@@ -97,8 +75,6 @@ int main()
         } else
             break;
     }
-    // printf("%d",k);
-    int q1 = 1, q2 = 1, q3 = 1;
     if (k == 6) {
         i = 0;
         if ((c[i] == 'c' || c[i] == 'C') && (c[i + 1] == 'i' || c[i + 1] == 'I')
@@ -106,58 +82,91 @@ int main()
             && (c[i + 3] == 'c' || c[i + 3] == 'C')
             && (c[i + 4] == 'l' || c[i + 4] == 'L')
             && (c[i + 5] == 'e' || c[i + 5] == 'E')) {
-            //    for(i=0;i<p;i++){
-            //        printf("%c",c[i]);
-            //    }
         } else {
-            printf("Please,enter the correct data(circle)");
+            printf("Input correct data(circle)");
             q3 = 0;
         }
     } else {
-        printf("\nPlease,enter the correct data(circle)");
+        printf("Input correct data(circle)");
         q3 = 0;
     }
 
     i = 0;
-
     if (c[6] != '(') {
-        printf("\nPlease, enter the correct data(open bracket)");
+        printf("\nInput correct data(open bracket)");
         q1 = 0;
     }
-    int p1 = 0;
-    for (i = p; i > 0; i--) {
-        if (c[i] >= '0' && c[i] <= '9') {
+    int u = 0;
+    for (int i = p; i > 0; i--) {
+        if (c[i - 1] >= '0' && c[i - 1] <= '9') {
             break;
         } else {
-            p1++;
+            u++;
         }
     }
-    p1 -= 2;
-    if (p1 != 0) {
-        printf("\nPlease, enter the correct data(after close bracket)");
+    if (u - 1 != 0) {
+        printf("\nInput correct data(after close bracket)");
         q3 = 0;
     }
-    i = p - 1;
-    if (c[i] != ')') {
-        printf("\nPlease, enter the correct data(close bracket)");
+    if (c[p - u] != ')') {
+        printf("\nInput correct data(close bracket)");
         q2 = 0;
     }
-    int cr = p - p1, q5 = 1;
-    for (i = 6; i <= cr-1; i++) {
-     if((c[i]>='0' && c[i]<='9')||(c[i]=='.')||(c[i]==' ')||(c[i]==',')){
-        
-    }else{
-        q5=0;
-        printf("\nPlease,enter the correct data(in brackets)");
-        break;
-    }   
+    int q4 = 1;
+    for (int i = 7; i < p - u - 1; i++) {
+        if ((c[i] >= '0' && c[i] <= '9') || (c[i] == '.') || (c[i] == ' ')
+            || (c[i] == ',')) {
+        } else {
+            q4 = 0;
+            printf("\nInput correct data(in brackets)");
+            break;
+        }
     }
-    if (q1 == 1 && q2 == 1 && q3 == 1 && q5 == 1) {
-        for (i = 0; i < p; i++) {
+    if (q1 == 1 && q2 == 1 && q3 == 1 && q4 == 1) {
+        for (int i = 0; i < p; i++) {
             printf("%c", c[i]);
         }
     }
-
+    int  r1 = 7, l3, r2, r3;
+    if (q1 == 1 && q2 == 1 && q3 == 1 && q4 == 1) {
+        i = 7;
+        while (c[i + 1] != ' ') {
+            r1++;
+            i++;
+        }
+        i += 2;       
+        r2 = i;
+        while (c[i + 1] != ',') {
+            r2++;
+            i++;
+        }
+        i += 3;
+        l3 = i;
+        r3 = i;
+        while (c[i + 1] != ')') {
+            r3++;
+            i++;
+        }
+    }
+    t = 1, k = 0;
+    int o = 1;
+    float r;
+    int pr = 0, pl = 0;
+    o = 1, k = 0;
+    for (int i = l3; i < r3 + 1; i++) {
+        if (c[i] >= '0' && c[i] <= '9' && o == 1) {
+            pr = pr * 10 + (c[i] - 48);
+        } else if (c[i] - 48 == -2) {
+            i++;
+            o = 0;
+        }
+        if (c[i] >= '0' && c[i] <= '9' && o == 0) {
+            k++;
+            pl = pl * 10 + (c[i] - 48);
+        }
+    }
+    r = pr + pl * powf(10, -k);
+    printf("%f", r);
+    okr(r);
     return 0;
 }
-

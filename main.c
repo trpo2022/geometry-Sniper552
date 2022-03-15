@@ -1,14 +1,14 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #define SIZE_STR 100
 
 void okr(float rad)
 {
     printf("\nPerim: ");
-    printf("%f\n", 2 * M_PI  * rad);
+    printf("%f\n", 2 * M_PI * rad);
     printf("Square: ");
-    printf("%f", M_PI * pow(rad,2));
+    printf("%f", M_PI * pow(rad, 2));
 }
 
 int main()
@@ -31,13 +31,13 @@ int main()
         i++;
         a[i] = fgetc(file);
     }
-printf("Your input data: ");
-    int end1=i-1;
-   for(i=0;i<=end1;i++){
-   printf("%c",a[i]);
-   }
-    int end = i-1, j = 0, flag = 1, countsym = 0;
-    i=0;
+    printf("Your input data: ");
+    int end1 = i - 1;
+    for (i = 0; i <= end1; i++) {
+        printf("%c", a[i]);
+    }
+    int end = i - 1, j = 0, flag = 1, countsym = 0;
+    i = 0;
     for (j = 0; j < end; j++) {
         if (a[j] != ' ') {
             countsym++;
@@ -77,7 +77,8 @@ printf("Your input data: ");
     }
     if (countsym == 6) {
         i = 0;
-        if ((sbor[i] == 'c' || sbor[i] == 'C') && (sbor[i + 1] == 'i' || sbor[i + 1] == 'I')
+        if ((sbor[i] == 'c' || sbor[i] == 'C')
+            && (sbor[i + 1] == 'i' || sbor[i + 1] == 'I')
             && (sbor[i + 2] == 'r' || sbor[i + 2] == 'R')
             && (sbor[i + 3] == 'c' || sbor[i + 3] == 'C')
             && (sbor[i + 4] == 'l' || sbor[i + 4] == 'L')
@@ -104,7 +105,7 @@ printf("Your input data: ");
             trash++;
         }
     }
-    if (trash-1!= 0) {
+    if (trash - 1 != 0) {
         printf("\nYou data input is not correct(after close bracket)");
         error3 = 0;
     }
@@ -114,8 +115,8 @@ printf("Your input data: ");
     }
     int error4 = 1;
     for (int i = 7; i < endstr - trash - 1; i++) {
-        if ((sbor[i] >= '0' && sbor[i] <= '9') || (sbor[i] == '.') || (sbor[i] == ' ')
-            || (sbor[i] == ',')) {
+        if ((sbor[i] >= '0' && sbor[i] <= '9') || (sbor[i] == '.')
+            || (sbor[i] == ' ') || (sbor[i] == ',')) {
         } else {
             error4 = 0;
             printf("\nYou data input is not correct(in brackets)");
@@ -127,13 +128,13 @@ printf("Your input data: ");
             printf("%c", sbor[i]);
         }
     }
-    int  otbordozap, otborendi,otbori;
+    int otbordozap, otborendi, otbori;
     if (error1 == 1 && error2 == 1 && error3 == 1 && error4 == 1) {
         i = 7;
         while (sbor[i + 1] != ' ') {
             i++;
         }
-        i += 2;       
+        i += 2;
         otbordozap = i;
         while (sbor[i + 1] != ',') {
             otbordozap++;
@@ -162,8 +163,9 @@ printf("Your input data: ");
             chislo2 = chislo2 * 10 + (sbor[i] - 48);
         }
     }
-    if((chislo1>=0) && (chislo2>=0)){
-    float rad = chislo1 +chislo2 * pow(10,-countsym);
-    okr(rad);}
+    if ((chislo1 >= 0) && (chislo2 >= 0)) {
+        float rad = chislo1 + chislo2 * pow(10, -countsym);
+        okr(rad);
+    }
     return 0;
 }

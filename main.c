@@ -22,7 +22,7 @@ int main()
 
     if (file == NULL) {
         printf("unable to open file '%s'", fname);
-        return 0;
+        return 1;
     }
 
     a[i] = fgetc(file);
@@ -66,7 +66,7 @@ int main()
                 ;
         }
     }
-    int error1 = 1, error2 = 1, error3 = 1;
+    int ernum = 0;
     i = 0, countsym = 0;
     while (i < endstr) {
         if (sbor[i] >= 'a' && sbor[i] <= 'z') {
@@ -85,17 +85,17 @@ int main()
             && (sbor[i + 5] == 'e' || sbor[i + 5] == 'E')) {
         } else {
             printf("You data input is not correct(circle)");
-            error3 = 0;
+            ernum = 1;
         }
     } else {
         printf("You data input is not correct(circle)");
-        error3 = 0;
+        ernum = 1;
     }
 
     i = 0;
     if (sbor[6] != '(') {
         printf("\nYou data input is not correct(open bracket)");
-        error1 = 0;
+        ernum = 2;
     }
     int trash = 0;
     for (int i = endstr; i > 0; i--) {
@@ -107,29 +107,28 @@ int main()
     }
     if (trash - 1 != 0) {
         printf("\nYou data input is not correct(after close bracket)");
-        error3 = 0;
+        ernum = 3;
     }
     if (sbor[endstr - trash] != ')') {
         printf("\nYou data input is not correct(close bracket)");
-        error2 = 0;
+        ernum = 4;
     }
-    int error4 = 1;
     for (int i = 7; i < endstr - trash - 1; i++) {
         if ((sbor[i] >= '0' && sbor[i] <= '9') || (sbor[i] == '.')
             || (sbor[i] == ' ') || (sbor[i] == ',')) {
         } else {
-            error4 = 0;
+            ernum = 5;
             printf("\nYou data input is not correct(in brackets)");
             break;
         }
     }
-    if (error1 == 1 && error2 == 1 && error3 == 1 && error4 == 1) {
+    if (ernum == 0) {
         for (int i = 0; i < endstr; i++) {
             printf("%c", sbor[i]);
         }
     }
     int otbordozap, otborendi, otbori;
-    if (error1 == 1 && error2 == 1 && error3 == 1 && error4 == 1) {
+    if (ernum == 0) {
         i = 7;
         while (sbor[i + 1] != ' ') {
             i++;
@@ -163,9 +162,10 @@ int main()
             chislo2 = chislo2 * 10 + (sbor[i] - 48);
         }
     }
-    if ((chislo1 >= 0) && (chislo2 >= 0)) {
+    if ((chislo1 >= 0) && (chislo2 >= 0) && ernum == 0) {
         float rad = chislo1 + chislo2 * pow(10, -countsym);
         okr(rad);
     }
+    free(sbor);
     return 0;
 }

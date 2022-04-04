@@ -4,11 +4,10 @@
 #include <stdlib.h>
 #define SIZE_STR 100
 
-
 int main()
 {
     FILE* file;
-    char* fname = "lab_input.txt";
+    char* fname = "src/main/lab_input.txt";
     file = fopen(fname, "r");
 
     int a[SIZE_STR];

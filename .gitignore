@@ -1,2 +1,5 @@
-main
+*.a
+*.d
+*.o
+bin/main
 

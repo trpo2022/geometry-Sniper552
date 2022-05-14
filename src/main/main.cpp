@@ -3,6 +3,6 @@
 int main()
 {
     const char file[] = "lab_input.txt";
-    circles();
+    circles(file);
     return 0;
 }

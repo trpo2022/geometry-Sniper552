@@ -19,4 +19,3 @@ float koor_y(char sbor[], int, int);
 void circle(char sbor[], int endstr, float rez[3]);
 void peresech(float rez1[], float rez2[]);
 int circles(const char*);
-

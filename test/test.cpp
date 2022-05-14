@@ -1,10 +1,9 @@
 #include <ctest.h>
 #include <libmain/check.h>
 
-
 CTEST(suite, test1_true)
 {
-   char filename[]="test/testfile/test1.txt";
+    char filename[] = "test/testfile/test1.txt";
     int result = circles(filename);
 
     ASSERT_FALSE(result);

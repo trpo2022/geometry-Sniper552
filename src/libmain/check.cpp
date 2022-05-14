@@ -206,17 +206,17 @@ void peresech(float rez1[], float rez2[])
     }
 }
 
-int circles()
+int circles(const char* fileb)
 {
     FILE* file;
-    const char* fname = "lab_input.txt";
-    file = fopen(fname, "r");
+
+    file = fopen(fileb, "r");
 
     int a[SIZE_STR];
     int i = 0;
     float rez1[3] = {0, 0, 0}, rez2[3] = {0, 0, 0};
     if (file == nullptr) {
-        printf("unable to open file '%s'", fname);
+        printf("unable to open file ");
         return 1;
     }
 

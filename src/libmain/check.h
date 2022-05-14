@@ -18,5 +18,5 @@ float koor_x(char sbor[], int, int);
 float koor_y(char sbor[], int, int);
 void circle(char sbor[], int endstr, float rez[3]);
 void peresech(float rez1[], float rez2[]);
-int circles();
+int circles(const char*);
 
